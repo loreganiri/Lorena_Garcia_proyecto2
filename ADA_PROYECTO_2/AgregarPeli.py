@@ -5,7 +5,7 @@ class CatalogoPelicula:
     self.nombre = nombre  # Atributo de instancia
 
 def guardar(): 
-    with open ("Catalogo.txt", 'a') as archivo:
+    with open (Catalogo, 'a') as archivo:
       print("Escribe el nombre de la pelicula a registrar")
       nombre = input()
       print("Escribe el genero de la pelicula a registrar")
@@ -30,15 +30,14 @@ def guardar():
     return print("Pelicula guardada")
 
 def listar():
-  with open ("Catalogo.txt", 'r') as archivo:
+  with open (Catalogo, 'r') as archivo:
    linea = archivo.readline()
    while linea:
        print(linea.strip())
        linea = archivo.readline()
-       
-
+  
 def empezar():
-  with open ("Catalogo.txt", 'w') as archivo:
+  with open (Catalogo, 'w') as archivo:
       print("Escribe el nombre de la pelicula a registrar")
       nombre = input()
       print("Escribe el genero de la pelicula a registrar")
@@ -58,17 +57,7 @@ def empezar():
       archivo.write(director)
       archivo.write("/ ")
       archivo.write(duracion)
-      archivo.write(" ")
-      
-      #NOTA ESTOY TRABAJANDO SOBRE ESTO, GUARDA HASTA QUE LLEGA A LA OPCION DE AGREGAR, VOY A CORREGIR AQUI A VER POR QUE LO HACE
-      # print("¿Deseas agregar otra pelicula? SI/NO")
-      # otra = input()
-      # if otra.lower()in ["si"]:
-      #  guardar()
-      # else: 
-      #   otra.lower() in ["no"]
-      #   print("Ok, gracias, adiosito!")
-        
+      archivo.write(" ")        
         
 class Pelicula:
   def __init__(self, id, nombre, genero, anio, director, duracion):
@@ -79,10 +68,15 @@ class Pelicula:
     self.director = director  # Atributo de instancia
     self.duracion = duracion  # Atributo de instancia
        
-
 import os   
 print("Hola Bienvenido a Pelimovie")
-print("Escoge que deseas hacer (typea el numero)")
+
+print("Dame el nombre del Catalogo a crear")
+Catalogo = input()
+Catalogo = Catalogo + ".txt"
+print(Catalogo)
+
+print("Ahora escoge que deseas hacer (typea el numero)")
 print("1.- Agregar pelicula")
 print("2.- Listar peliculas")
 print("3.- Eliminar catalogo de peliculas")
@@ -97,24 +91,26 @@ while True:
         if choose == 1:
           from pathlib import Path
           print("Escogio la 1")   
-          try:
-            with open('Catalogo.txt') as f:     
+
+          try:           
+            with open(Catalogo) as w:     
              print("El archivo existe")
-             print("¿Deseas agregar otra pelicula? SI/NO")
-             otra = input()
-             if otra.lower()in ["si"]:
-              empezar()
-             else: 
+             
+          except FileNotFoundError:
+                print("El archivo {Catalogo} aun no existe, generando... ", Catalogo)
+                empezar()
+          
+          print("¿Deseas agregar otra pelicula? SI/NO")
+          otra = input()
+          if otra.lower()in ["si"]:
+              guardar()
+          else: 
               otra.lower() in ["no"]
               print("Ok, gracias, adiosito!")
 
-          except FileNotFoundError:
-                print("El archivo aun no existe")
-                empezar(list)
-        
         elif choose == 2:
            try: 
-               with open('Catalogo.txt') as f:      
+               with open(Catalogo) as f:      
                 print("Mostrar peliculas existentes en el catalogo")
                 listar()
            except FileNotFoundError:
@@ -122,7 +118,7 @@ while True:
         elif choose == 3:
                 print("Eliminacion del Catalogo en proceso")
                 import os
-                file = 'Catalogo.txt'
+                file = Catalogo
                 if os.path.exists(file): 
                     os.remove(file)
                     print("Este archivo fue eliminado con exito")
