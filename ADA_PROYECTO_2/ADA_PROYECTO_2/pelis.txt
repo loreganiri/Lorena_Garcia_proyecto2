@@ -1,2 +1,0 @@
-movie1/ genero1/ anio1/ dire1/ 120
-peli/ peli/ peli/ peli/ 2
