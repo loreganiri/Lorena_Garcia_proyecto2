@@ -1,8 +1,9 @@
 
 class CatalogoPelicula:
-   def __init__(self, ruta, nombre):
+   def __init__(self, ruta, nombre, Catalogo):
     self.ruta = ruta # Atributo instancia
     self.nombre = nombre  # Atributo de instancia
+    self.Catalogo = Catalogo
 
 def guardar(): 
     with open (Catalogo, 'a') as archivo:
@@ -17,17 +18,16 @@ def guardar():
       print("Escribe la duracion de la pelicula a registrar")
       duracion = input ()
       archivo.write(nombre)
-      archivo.write(",")
+      archivo.write("/ ")
       archivo.write(genero)
-      archivo.write(",")
+      archivo.write("/ ")
       archivo.write(anio)
-      archivo.write(",")
+      archivo.write("/ ")
       archivo.write(director)
-      archivo.write(",")
+      archivo.write("/ ")
       archivo.write(duracion)
-      archivo.write("\n")
+      archivo.write("\n")          
       
-    return print("Pelicula guardada")
 
 def listar():
   with open (Catalogo, 'r') as archivo:
@@ -57,7 +57,7 @@ def empezar():
       archivo.write(director)
       archivo.write("/ ")
       archivo.write(duracion)
-      archivo.write(" ")        
+      archivo.write("\n")        
         
 class Pelicula:
   def __init__(self, id, nombre, genero, anio, director, duracion):
@@ -74,7 +74,15 @@ print("Hola Bienvenido a Pelimovie")
 print("Dame el nombre del Catalogo a crear")
 Catalogo = input()
 Catalogo = Catalogo + ".txt"
-print(Catalogo)
+print(f"El archivo {Catalogo} ha sido creado", Catalogo)
+
+from pathlib import Path
+try:           
+    with open(Catalogo) as w:     
+        print("El archivo existe")         
+except FileNotFoundError:
+        print("El archivo {Catalogo} aun no existe, generando... ", Catalogo)
+        empezar()
 
 print("Ahora escoge que deseas hacer (typea el numero)")
 print("1.- Agregar pelicula")
@@ -89,29 +97,12 @@ while True:
        print("Opcion invalida, intenta de nuevo")
    else:
         if choose == 1:
-          from pathlib import Path
-          print("Escogio la 1")   
-
-          try:           
-            with open(Catalogo) as w:     
-             print("El archivo existe")
-             
-          except FileNotFoundError:
-                print("El archivo {Catalogo} aun no existe, generando... ", Catalogo)
-                empezar()
-          
-          print("¿Deseas agregar otra pelicula? SI/NO")
-          otra = input()
-          if otra.lower()in ["si"]:
               guardar()
-          else: 
-              otra.lower() in ["no"]
-              print("Ok, gracias, adiosito!")
-
+              
         elif choose == 2:
            try: 
                with open(Catalogo) as f:      
-                print("Mostrar peliculas existentes en el catalogo")
+                print(Catalogo)
                 listar()
            except FileNotFoundError:
                 print("El archivo no existe, por favor registra una pelicula primero.")  
