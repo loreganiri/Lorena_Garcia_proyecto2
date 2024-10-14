@@ -1,3 +1,5 @@
+
+   
 class CatalogoPelicula:
    def __init__(self, ruta, nombre, Catalogo):
     self.ruta = ruta # Atributo instancia
@@ -5,7 +7,9 @@ class CatalogoPelicula:
     self.Catalogo = Catalogo
 
 def guardar():
-    from Menu import Catalogo 
+    from Menu import Catalogo #Esta linea me corre todo el modulo, 
+    #en vez de solo llamar la variable que estoy pidiendo (var Catalogo), no logro encontrar el motivo, 
+    # investigando esto se supone que deberia ser correcto asi. Si continuas respondiendo lo que pide finalmente hace lo que deberia hacer a la segunda vez
     with open (Catalogo, 'a') as archivo:
       print("Escribe el nombre de la pelicula a registrar")
       nombre = input()
@@ -29,7 +33,9 @@ def guardar():
       archivo.write("\n")          
       
 def listar():
-  from Menu import Catalogo
+  from Menu import Catalogo #Esta linea me corre todo el modulo, 
+    #en vez de solo llamar la variable que estoy pidiendo (var Catalogo), no logro encontrar el motivo, 
+    # investigando esto se supone que deberia ser correcto asi. Si continuas respondiendo lo que pide finalmente hace lo que deberia hacer a la segunda vez
   with open (Catalogo, 'r') as archivo:
    linea = archivo.readline()
    while linea:
@@ -37,7 +43,9 @@ def listar():
        linea = archivo.readline()
   
 def empezar():
-  from Menu import Catalogo
+  from Menu import Catalogo  #Esta linea me corre todo el modulo, 
+    #en vez de solo llamar la variable que estoy pidiendo (var Catalogo), no logro encontrar el motivo, 
+    # investigando esto se supone que deberia ser correcto asi. Si continuas respondiendo lo que pide finalmente hace lo que deberia hacer a la segunda vez
   with open (Catalogo, 'w') as archivo:
       print("Escribe el nombre de la pelicula a registrar")
       nombre = input()
@@ -69,46 +77,3 @@ class Pelicula:
     self.director = director  # Atributo de instancia
     self.duracion = duracion  # Atributo de instancia
        
-
-
-# import Menu
-# from Menu import *
-
-# print("Ahora escoge que deseas hacer (typea el numero)")
-# print("1.- Agregar pelicula")
-# print("2.- Listar peliculas")
-# print("3.- Eliminar catalogo de peliculas")
-# print("4.- Salir")
-# while True:
-#    print("Dame un numero entre 1 y 4: ")
-#    choose=int(input())
-#    if choose not in range(1,5):
-#        print("Opcion invalida, intenta de nuevo")
-#    else:
-
-#         if choose == 1:
-              
-#               guardar()
-              
-#         elif choose == 2:
-#            try: 
-#                with open(Catalogo) as f:   
-                  
-#                 print(Catalogo)
-#                 listar()
-#            except FileNotFoundError:
-#                 print("El archivo no existe, por favor registra una pelicula primero.")  
-#         elif choose == 3:
-#                 print("Eliminacion del Catalogo en proceso")
-#                 import os
-                
-#                 file = Catalogo
-#                 if os.path.exists(file): 
-#                     os.remove(file)
-#                     print("Este archivo fue eliminado con exito")
-#                 else:
-#                     print("No se encontro tal archivo")
-#         else:
-#           if choose ==4:
-#                 print("Muchas gracias por visitarnos! Adios!")
-#                 exit()

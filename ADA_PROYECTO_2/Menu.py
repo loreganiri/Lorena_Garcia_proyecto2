@@ -1,3 +1,4 @@
+
 import os   
 from pathlib import Path
 
@@ -9,19 +10,20 @@ Catalogo = Catalogo + ".txt"
 print(f"El archivo {Catalogo} ha sido creado")
 
 try:           
-    with open(Catalogo) as w:     
-        print("Abriendo archivo")
-        print ("¿Deseas agregar una pelicula para iniciar el catalogo? Si/No")
-        answer = input()
-        if answer.lower()in ["si"]:
-            from AgregarPeli import empezar
-            empezar()
-        else: 
+     with open(Catalogo) as w:     
+         print("Abriendo archivo")
+         print ("¿Deseas agregar una pelicula para iniciar el catalogo? Si/No")
+         answer = input()
+         if answer.lower()in ["si"]:
+             from AgregarPeli import empezar
+             empezar()
+         else: 
             answer.lower() in ["no"]
             print("Ok, gracias, adiosito!")
         
 except FileNotFoundError:
         print(f"El archivo {Catalogo} aun no existe, generando... ")
+        from AgregarPeli import empezar
         empezar()
 
 print (Catalogo)
